@@ -1,12 +1,14 @@
 import {
   FETCH_TODOS_READIED,
   FETCH_TODOS_FULFILLED,
+  SET_TODOS_INPUT_TITLE,
   ADD_TODOS_ITEM_FULFILLED,
   UPDATE_TODOS_ITEM_FULFILLED,
   DELETE_TODOS_ITEM_FULFILLED,
 } from './action';
 
 const initialState = {
+  inputTitle: '',
   fetch: false,
   items: [],
 };
@@ -25,6 +27,15 @@ export default function reducer(state = initialState, { type, payload }) {
       return Object.assign({}, state, {
         fetch: false,
         items: todos,
+      });
+    }
+
+    case SET_TODOS_INPUT_TITLE: {
+      console.log('set', payload);
+      const { inputTitle } = payload;
+
+      return Object.assign({}, state, {
+        inputTitle,
       });
     }
 

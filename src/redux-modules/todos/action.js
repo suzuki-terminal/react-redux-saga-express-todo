@@ -12,6 +12,11 @@ export const FETCH_TODOS_FULFILLED = shortid.generate();
 export const fetchTodosFulfilled = createAction(FETCH_TODOS_FULFILLED);
 
 
+// - Set Todos Input Title
+export const SET_TODOS_INPUT_TITLE = shortid.generate();
+export const setTodosInputTitle = createAction(SET_TODOS_INPUT_TITLE);
+
+
 // - Add Todos Item
 export const ADD_TODOS_ITEM = shortid.generate();
 export const addTodosItem = createAction(ADD_TODOS_ITEM);

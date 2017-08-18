@@ -1,4 +1,4 @@
-import { take, fork, put, call } from 'redux-saga/effects';
+import { take, fork, put, call, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import {
@@ -8,6 +8,7 @@ import {
   DELETE_TODOS_ITEM,
   fetchTodosReadied,
   fetchTodosFulfilled,
+  setTodosInputTitle,
   addTodosItemFulfilled,
   updateTodosItemFulfilled,
   deleteTodosItemFulfilled,
@@ -33,10 +34,13 @@ function* handleFetchTodos() {
  */
 function* handleAddTodosItem() {
   while (true) {
-    const { payload: { title } } = yield take(ADD_TODOS_ITEM);
+    yield take(ADD_TODOS_ITEM);
+
+    const title = yield select(state => state.todos.inputTitle);
 
     const { data: { todo } } = yield call(axios.post, '/api/todos', { title });
 
+    yield put(setTodosInputTitle({ inputTitle: '' }));
     yield put(addTodosItemFulfilled({ todo }));
   }
 }
